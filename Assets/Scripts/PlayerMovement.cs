@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
-	public float moveSpeed = 10;
-	public float flightSpeed = 10;
-	public float jumpSpeed = 10;
+	public float moveSpeed;
+	public float flightSpeed;
+	public float jumpSpeed;
 
 	private Rigidbody rb;
 
