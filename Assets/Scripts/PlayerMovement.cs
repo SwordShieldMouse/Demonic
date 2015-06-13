@@ -23,8 +23,8 @@ public class PlayerMovement : MonoBehaviour {
 		// Movement
 		float horizontal = Input.GetAxis ("Horizontal");
 		float vertical = Input.GetAxis ("Vertical");
-		Vector3 moveVec = new Vector3 (horizontal, 0, vertical) * moveSpeed;
-		rb.AddForce (moveVec);
+		Vector3 moveVec = new Vector3 (horizontal, 0.0f, vertical) * moveSpeed;
+		rb.AddForce (moveVec*moveSpeed);
 
 		// Jumping
 		if (Input.GetButton ("Jump")) {
