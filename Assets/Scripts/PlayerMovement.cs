@@ -6,17 +6,17 @@ public class PlayerMovement : MonoBehaviour {
 	public float flightSpeed = 10;
 	public float jumpSpeed = 10;
 	public float rotateSpeed = 5;
+	public float jumpDelay = 0.5f;
 
 	private Rigidbody rb;
 
 	private bool isFlying;
 	private float lastJump;
-	private float jumpDelay;
+
 
 	// Use this for initialization
 	void Start () {
 		isFlying = false;
-		jumpDelay = 0.5f;
 		lastJump = Time.time - jumpDelay;
 		rb = GetComponent<Rigidbody> ();
 
@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour {
 			if (OnGround () && (Time.time - lastJump >= jumpDelay)) {
 				Vector3 jumpVec = new Vector3 (0, jumpSpeed, 0);
 				rb.AddForce (jumpVec);
+				lastJump = Time.time;
 			}
 		}
 	}
@@ -70,15 +71,8 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	bool OnGround() {
-		bool value = Physics.Raycast(rb.position, -Vector3.up, 
+		return Physics.Raycast(rb.position, -Vector3.up, 
 		                       GetComponent<Collider>().bounds.extents.y + 0.1f);
-		if (value) {
-			isFlying = false;
-			rb.useGravity = true;
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	void FixedUpdate() {
