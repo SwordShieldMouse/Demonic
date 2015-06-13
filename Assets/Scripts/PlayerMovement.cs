@@ -7,11 +7,14 @@ public class PlayerMovement : MonoBehaviour {
 	public float jumpSpeed = 10;
 
 	private Rigidbody rb;
-	private bool hasJumped;
+
+	private float lastJump;
+	private float jumpDelay;
 
 	// Use this for initialization
 	void Start () {
-		hasJumped = false;
+		jumpDelay = 0.5f;
+		lastJump = Time.time - jumpDelay;
 		rb = GetComponent<Rigidbody> ();
 	}
 	
@@ -20,11 +23,21 @@ public class PlayerMovement : MonoBehaviour {
 		// Movement
 		float horizontal = Input.GetAxis ("Horizontal");
 		float vertical = Input.GetAxis ("Vertical");
-		Vector3 moveVector = new Vector3 (horizontal, 0, vertical) * moveSpeed;
-		rb.AddForce (moveVector);
+		Vector3 moveVec = new Vector3 (horizontal, 0, vertical) * moveSpeed;
+		rb.AddForce (moveVec);
 
 		// Jumping
+		if (Input.GetButton ("Jump")) {
+			if (OnGround () && (Time.time - lastJump >= jumpDelay)) {
+				Vector3 jumpVec = new Vector3 (0, jumpSpeed, 0);
+				rb.AddForce (jumpVec);
+			}
+		}
+	}
 
+	bool OnGround() {
+		return Physics.Raycast(rb.position, -Vector3.up, 
+		                       GetComponent<Collider>().bounds.extents.y + 0.1f);
 	}
 
 	void FixedUpdate() {
