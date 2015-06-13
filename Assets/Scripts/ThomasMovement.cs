@@ -42,6 +42,12 @@ public class ThomasMovement : MonoBehaviour {
 				rb.AddForce (jumpVec);
 			}
 		}
+
+		if(Input.GetKey (KeyCode.LeftShift)){
+			Vector3 flyVec = new Vector3 (0, flightSpeed, 0);
+			rb.AddForce (flyVec);
+		}
+
 	}
 	
 	bool OnGround() {
