@@ -12,7 +12,6 @@ public class EnergyBlast : MonoBehaviour {
 			Rigidbody clone;
 			clone = Instantiate(projectileD, offset, transform.rotation) as Rigidbody;
 			clone.velocity = transform.TransformDirection(Vector3.forward * 10);
-			Object.Destroy (projectileD,2.0f);
 		}
 	}
 }
