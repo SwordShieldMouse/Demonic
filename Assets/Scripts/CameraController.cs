@@ -8,6 +8,9 @@ public class CameraController : MonoBehaviour {
 	public float yMin = -20f;
 	public float yMax = 80f;
 
+	// Turning rate of the player when RMB is held
+	public float turningRate = 60f;
+
 	private float x;
 	private float y;
 
@@ -19,19 +22,25 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () { //late means runs after all processes updated
-		// Free follow, without rmb held down
-		if (!Input.GetMouseButton(1)) {
-			x += Input.GetAxis ("Mouse X");
-			y -= Input.GetAxis ("Mouse Y");
+		y -= Input.GetAxis ("Mouse Y");
+		x += Input.GetAxis ("Mouse X");
 
-			y = ClampAngle (y, yMin, yMax);
+		y = ClampAngle (y, yMin, yMax);
+		
+		Quaternion rotation = Quaternion.Euler (y, x, 0);
 
-			Quaternion rotation = Quaternion.Euler (-y, x, 0);
+		Vector3 position = rotation * new Vector3 (0.0f, 0.0f, -distance);
+		
+		transform.rotation = rotation;
+		transform.position = player.transform.position + position;
 
-			Vector3 position = rotation * new Vector3 (0.0f, 0.0f, -distance);
-
-			transform.rotation = rotation;
-			transform.position = player.transform.position + position;
+		// If rmb held down, player rotation follows camera
+		if (Input.GetMouseButton (1)) {
+			player.transform.rotation = Quaternion.RotateTowards(
+				player.transform.rotation,
+				rotation,
+				turningRate * Time.deltaTime
+				);
 		}
 	}
 

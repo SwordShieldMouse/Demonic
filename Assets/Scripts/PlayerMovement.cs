@@ -30,10 +30,10 @@ public class PlayerMovement : MonoBehaviour {
 		rb.AddForce (moveVec);
 
 		// Rotation with mouse with right click
-		if (Input.GetMouseButton (1)) {
+		/*if (Input.GetMouseButton (1)) {
 			float x = Input.GetAxis ("Mouse X");
 			transform.Rotate (0, -x * rotateSpeed, 0);
-		}
+		}*/
 
 		// Jumping
 		if (Input.GetButton ("Jump")) {
