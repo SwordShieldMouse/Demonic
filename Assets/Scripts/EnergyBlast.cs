@@ -14,4 +14,4 @@ public class EnergyBlast : MonoBehaviour {
 			clone.velocity = transform.TransformDirection(Vector3.forward * 10);
 		}
 	}
-}
+}	
