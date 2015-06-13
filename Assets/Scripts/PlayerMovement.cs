@@ -2,14 +2,16 @@
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
-	public float moveSpeed;
-	public float flightSpeed;
-	public float jumpSpeed;
+	public float moveSpeed = 10;
+	public float flightSpeed = 10;
+	public float jumpSpeed = 10;
 
 	private Rigidbody rb;
+	private bool hasJumped;
 
 	// Use this for initialization
 	void Start () {
+		hasJumped = false;
 		rb = GetComponent<Rigidbody> ();
 	}
 	
@@ -18,7 +20,7 @@ public class PlayerMovement : MonoBehaviour {
 		// Movement
 		float horizontal = Input.GetAxis ("Horizontal");
 		float vertical = Input.GetAxis ("Vertical");
-		Vector3 moveVector = new Vector3 (horizontal, vertical, 0) * moveSpeed;
+		Vector3 moveVector = new Vector3 (horizontal, 0, vertical) * moveSpeed;
 		rb.AddForce (moveVector);
 
 		// Jumping
