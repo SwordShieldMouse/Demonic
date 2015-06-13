@@ -15,8 +15,8 @@ public class Blast : MonoBehaviour {
 			//GameObject.CreatePrimitive(PrimitiveType.Cube);	
 			//Rigidbody clone;
 
-			Rigidbody instantiatedProjectile = Instantiate(energyBlast,transform.position,transform.rotation)as Rigidbody;
-			instantiatedProjectile.velocity = transform.TransformDirection(new Vector3(0, 0,10));
+			//Rigidbody instantiatedProjectile = Instantiate(energyBlast,transform.position,transform.rotation)as Rigidbody;
+			//instantiatedProjectile.velocity = transform.TransformDirection(new Vector3(0, 0,10));
 
 			//for (int i = 0; i < 1; i++) {
 			//	Instantiate(Cube, new Vector3(i * 2.0F, 0, 0), Quaternion.identity);
