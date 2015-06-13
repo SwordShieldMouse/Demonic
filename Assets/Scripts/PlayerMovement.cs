@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour {
 	public float moveSpeed = 10;
 	public float flightSpeed = 10;
 	public float jumpSpeed = 10;
+	public float rotateSpeed = 5;
 
 	private Rigidbody rb;
 
@@ -16,6 +17,8 @@ public class PlayerMovement : MonoBehaviour {
 		jumpDelay = 0.5f;
 		lastJump = Time.time - jumpDelay;
 		rb = GetComponent<Rigidbody> ();
+
+		rb.freezeRotation = true;
 	}
 	
 	// Update is called once per frame
@@ -25,6 +28,12 @@ public class PlayerMovement : MonoBehaviour {
 		float vertical = Input.GetAxis ("Vertical");
 		Vector3 moveVec = new Vector3 (horizontal, 0, vertical) * moveSpeed;
 		rb.AddForce (moveVec);
+
+		// Rotation with mouse with right click
+		if (Input.GetMouseButton(1)) {
+			float x = Input.GetAxis ("Mouse X");
+			transform.Rotate (0, -x * rotateSpeed, 0);
+		}
 
 		// Jumping
 		if (Input.GetButton ("Jump")) {
