@@ -9,11 +9,13 @@ public class PlayerMovement : MonoBehaviour {
 
 	private Rigidbody rb;
 
+	private bool isFlying;
 	private float lastJump;
 	private float jumpDelay;
 
 	// Use this for initialization
 	void Start () {
+		isFlying = false;
 		jumpDelay = 0.5f;
 		lastJump = Time.time - jumpDelay;
 		rb = GetComponent<Rigidbody> ();
@@ -29,14 +31,19 @@ public class PlayerMovement : MonoBehaviour {
 		Vector3 moveVec = new Vector3 (horizontal, 0, vertical) * moveSpeed;
 		rb.AddForce (moveVec);
 
-		// Rotation with mouse with right click
-		/*if (Input.GetMouseButton (1)) {
-			float x = Input.GetAxis ("Mouse X");
-			transform.Rotate (0, -x * rotateSpeed, 0);
-		}*/
+		// Flight
+		CheckFlight ();
+		if (isFlying) {
+			rb.useGravity = false;
+			DoFlight();
+		}
 
 		// Jumping
-		if (Input.GetButton ("Jump")) {
+		CheckJump ();
+	}
+
+	void CheckJump() {
+		if (Input.GetButtonDown ("Jump") && !isFlying) {
 			if (OnGround () && (Time.time - lastJump >= jumpDelay)) {
 				Vector3 jumpVec = new Vector3 (0, jumpSpeed, 0);
 				rb.AddForce (jumpVec);
@@ -44,9 +51,34 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
+	void DoFlight() {
+		if (Input.GetButton ("Descend")) {
+			Vector3 descend = new Vector3(0, -flightSpeed, 0);
+			rb.AddForce(descend);
+		}
+		if (Input.GetButton ("Jump")) {
+			Vector3 ascend = new Vector3(0, flightSpeed, 0);
+			rb.AddForce(ascend);
+		}
+	}
+
+	void CheckFlight() {
+		if (Input.GetButton("Flight")) {
+			isFlying = !isFlying;
+			rb.useGravity = !rb.useGravity;
+		}
+	}
+
 	bool OnGround() {
-		return Physics.Raycast(rb.position, -Vector3.up, 
+		bool value = Physics.Raycast(rb.position, -Vector3.up, 
 		                       GetComponent<Collider>().bounds.extents.y + 0.1f);
+		if (value) {
+			isFlying = false;
+			rb.useGravity = true;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	void FixedUpdate() {
