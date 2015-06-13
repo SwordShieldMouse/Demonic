@@ -1,0 +1,35 @@
+﻿"added jumping"
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# Explicit paths specified without -i or -o; assuming --only paths...
+# On branch master
+# Changes to be committed:
+#	modified:   Library/AssetServerCacheV3
+#	modified:   Library/ScriptAssemblies/BuiltinAssemblies.stamp
+#	modified:   Library/ScriptMapper
+#	modified:   Library/guidmapper
+#	modified:   Library/metadata/00/00000000000000002000000000000000
+#	modified:   Library/metadata/00/00000000000000003000000000000000
+#	modified:   Library/metadata/00/00000000000000004100000000000000
+#	modified:   Library/metadata/00/00000000000000005000000000000000
+#	modified:   Library/metadata/00/00000000000000005100000000000000
+#	modified:   Library/metadata/00/00000000000000006000000000000000
+#	modified:   Library/metadata/00/00000000000000006100000000000000
+#	modified:   Library/metadata/00/00000000000000007000000000000000
+#	modified:   Library/metadata/00/00000000000000008000000000000000
+#	modified:   Library/metadata/00/00000000000000009000000000000000
+#	modified:   Library/metadata/00/0000000000000000a000000000000000
+#	modified:   Library/metadata/00/0000000000000000b000000000000000
+#	modified:   Library/metadata/00/0000000000000000c000000000000000
+#	modified:   Library/metadata/80/80a3616ca19596e4da0f10f14d241e9f
+#	modified:   Library/metadata/f5/f5f67c52d1564df4a8936ccd202a3bd8
+#	modified:   ProjectSettings/ProjectSettings.asset
+#	modified:   ProjectSettings/ProjectVersion.txt
+#
+# Untracked files:
+#	Assets/Materials.meta
+#	Assets/Materials/
+#	Assets/Scenes/destruct scene.unity
+#	Assets/Scenes/destruct scene.unity.meta
+#
+
