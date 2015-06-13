@@ -36,11 +36,17 @@ public class CameraController : MonoBehaviour {
 
 		// If rmb held down, player rotation follows camera
 		if (Input.GetMouseButton (1)) {
-			player.transform.rotation = Quaternion.RotateTowards(
+			Quaternion playerRotate = Quaternion.RotateTowards(
 				player.transform.rotation,
 				rotation,
 				turningRate * Time.deltaTime
 				);
+			playerRotate = Quaternion.Euler(new Vector3(
+				0.0f,
+				playerRotate.eulerAngles.y,
+				0.0f
+				));
+			player.transform.rotation = playerRotate;
 		}
 	}
 
