@@ -17,12 +17,16 @@ public class PlayerOffensiveAbilities : MonoBehaviour {
 	private float lastExplode;
 	private float lastSummon;
 
+	private ParticleSystem particles;
 
 	// Use this for initialization
 	void Start () {
-		canFire = false;
+		particles = GetComponent<ParticleSystem> ();
+		particles.enableEmission = false;
+
+		canFire = true;
 		canExplode = true;
-		canSummon = false;
+		canSummon = true;
 
 		lastFire = Time.time;
 		lastExplode = Time.time;
@@ -37,6 +41,12 @@ public class PlayerOffensiveAbilities : MonoBehaviour {
 	}
 
 	void Fire() {
+		if (Input.GetKeyDown(KeyCode.Alpha1)) {
+			if (canFire && (Time.time - lastFire) >= fireCooldown) {
+				Debug.Log ("Pressed 1");
+				particles.enableEmission = true;
+			}
+		}
 	}
 
 	void Explode() {
@@ -45,7 +55,7 @@ public class PlayerOffensiveAbilities : MonoBehaviour {
 				Collider[] colliders = Physics.OverlapSphere (transform.position, explodeRadius);
 				foreach (Collider c in colliders) {
 					Rigidbody crb = c.GetComponent<Rigidbody> ();
-					if (crb != null) {
+					if (crb != null && crb != GetComponent<Rigidbody>()) {
 						crb.AddExplosionForce (explodePower, transform.position, explodeRadius, 2.0f);
 					}
 				}
