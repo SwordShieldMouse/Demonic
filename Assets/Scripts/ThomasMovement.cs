@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ThomasMovement : MonoBehaviour {
+
 	public float moveSpeed = 10;
 	public float flightSpeed = 10;
 	public float jumpSpeed = 10;
+	//public Text DimensionText;
 	//public float rotateSpeed = 5;
 	
 	private Rigidbody rb;
@@ -17,6 +20,7 @@ public class ThomasMovement : MonoBehaviour {
 		jumpDelay = 0.5f;
 		lastJump = Time.time - jumpDelay;
 		rb = GetComponent<Rigidbody> ();
+		//DimensionText.text = "m";
 		
 		//rb.freezeRotation = true;
 	}
@@ -40,6 +44,7 @@ public class ThomasMovement : MonoBehaviour {
 			if (OnGround () && (Time.time - lastJump >= jumpDelay)) {
 				Vector3 jumpVec = new Vector3 (0, jumpSpeed, 0);
 				rb.AddForce (jumpVec);
+
 			}
 		}
 
@@ -47,6 +52,8 @@ public class ThomasMovement : MonoBehaviour {
 			Vector3 flyVec = new Vector3 (0, flightSpeed, 0);
 			rb.AddForce (flyVec);
 		}
+
+
 
 	}
 	
@@ -56,6 +63,6 @@ public class ThomasMovement : MonoBehaviour {
 	}
 	
 	void FixedUpdate() {
-		
+		//DimensionText.text = "Hello";
 	}
 }
